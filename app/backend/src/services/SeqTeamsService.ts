@@ -1,4 +1,4 @@
-import { SeqTeamsModel } from '../database/models';
+import SeqTeamsModel from '../database/models/SeqTeamsModel';
 import ITeamsService from '../Interfaces/teams/ITeamsServicel';
 import ITeam from '../Interfaces/teams/ITeam';
 import { ServiceResponse } from '../types/ServiceResponse';
