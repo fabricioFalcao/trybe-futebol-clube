@@ -1,7 +1,7 @@
 import ITeam from '../../Interfaces/teams/ITeam';
 import TeamsService from './TeamsService';
 
-export default class SeqTeamsTest extends TeamsService {
+export default class SeqTeamsService extends TeamsService {
   protected async team(id: number): Promise<ITeam | null> {
     return this.model.findByPk(id);
   }
