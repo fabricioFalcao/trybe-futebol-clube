@@ -9,7 +9,7 @@ import SeqTeamModel from '../database/models/SeqTeamModel';
 
 import { Response } from 'superagent';
 
-import { mockedTeamsList } from './mocks/teams.mocks'
+import { mockedTeamsList } from './mocks/team.mocks'
 
 chai.use(chaiHttp);
 

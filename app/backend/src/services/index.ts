@@ -1,4 +1,4 @@
-import SeqTeamService from './teams/SeqTeamService';
+import SeqTeamService from './team/SeqTeamService';
 
 export {
   SeqTeamService,
