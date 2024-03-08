@@ -1,10 +1,10 @@
-import ITeamsService from '../../Interfaces/teams/ITeamsService';
-import SeqTeamsModel from '../../database/models/SeqTeamsModel';
+import ITeamService from '../../Interfaces/teams/ITeamService';
+import SeqTeamModel from '../../database/models/SeqTeamModel';
 import ITeam from '../../Interfaces/teams/ITeam';
 import { ServiceResponse } from '../../types/ServiceResponse';
 
-export default abstract class TeamsService implements ITeamsService {
-  protected model = SeqTeamsModel;
+export default abstract class TeamService implements ITeamService {
+  protected model = SeqTeamModel;
 
   protected abstract teamsList(): Promise<ITeam[]>;
 

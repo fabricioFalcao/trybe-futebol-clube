@@ -1,5 +1,5 @@
-import TeamsController from './TeamsController';
+import TeamController from './TeamController';
 
 export {
-  TeamsController,
+  TeamController,
 };

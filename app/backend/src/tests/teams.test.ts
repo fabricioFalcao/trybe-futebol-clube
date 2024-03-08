@@ -5,7 +5,7 @@ import chaiHttp = require('chai-http');
 
 import { App } from '../app';
 import Example from '../database/models/ExampleModel';
-import SeqTeamsModel from '../database/models/SeqTeamsModel';
+import SeqTeamModel from '../database/models/SeqTeamModel';
 
 import { Response } from 'superagent';
 
@@ -48,8 +48,8 @@ describe('Teams endpoints integration tests', () => {
 
   it('should return status 200 and the list of all teams from database', async () => {
     // Arrange
-    const mockFindAllTeams = SeqTeamsModel.bulkBuild(mockedTeamsList)
-    sinon.stub(SeqTeamsModel, 'findAll').resolves(mockFindAllTeams)
+    const mockFindAllTeams = SeqTeamModel.bulkBuild(mockedTeamsList)
+    sinon.stub(SeqTeamModel, 'findAll').resolves(mockFindAllTeams)
 
     // Act
     const { status, body } = await chai.request(app).get('/teams')
@@ -61,8 +61,8 @@ describe('Teams endpoints integration tests', () => {
 
   it('should return status 200 and the correct team when searching by id', async () => {
     // Arrange
-    const mockFindTeamById = SeqTeamsModel.build(mockedTeamsList[0])
-    sinon.stub(SeqTeamsModel, 'findByPk').resolves(mockFindTeamById)
+    const mockFindTeamById = SeqTeamModel.build(mockedTeamsList[0])
+    sinon.stub(SeqTeamModel, 'findByPk').resolves(mockFindTeamById)
 
     // Act
     const { status, body } = await chai.request(app).get('/teams/1')
