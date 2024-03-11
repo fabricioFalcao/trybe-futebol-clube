@@ -8,7 +8,7 @@ import SeqUserModel from '../database/models/SeqUserModel'
 
 import { Response } from 'superagent';
 
-import { role, token, userFromDB } from './mocks/user.mock'
+import { role, token, userFromDB, validLogin } from './mocks/user.mock'
 
 chai.use(chaiHttp);
 
@@ -25,11 +25,11 @@ describe('Login endpoint integration tests', () => {
     sinon.stub(SeqUserModel, 'findOne').resolves(mockFindOneReturn)
 
     // Act
-    const { status, body } = await chai.request(app).post('/login')
+    const { status, body } = await chai.request(app).post('/login').send(validLogin)
 
     // Assert
     expect(status).to.equal(200);
-    expect(body).to.deep.equal(token);
+    expect(body.token.split('.')[0]).to.be.equal(token);
   })
 
 })

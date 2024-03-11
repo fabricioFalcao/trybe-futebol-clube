@@ -3,7 +3,7 @@ const userFromDB = {
   username: 'Chiquinha',
   role: 'Most lovely ever',
   email: 'fran@veiona.com',
-  password: 'vofrancisca'
+  password: '$2a$12$Oaje7l9io1NboIJJ4hBAOu657RsNEd3N.gxjKDdN14RphuRFYKqbO'
 }
 
 const validLogin = {
@@ -11,9 +11,8 @@ const validLogin = {
   password: 'vofrancisca'
 }
 
-const token = {
-  token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZyYW5AdmVpb25hLmNvbSIsImlkIjoxfQ.ezo-P_3epCLpm0gpvpsf3wTd1Rd6URGsRbgvI9C1Rp4'
-}
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
+
 
 const role = { role: 'Most lovely ever' }
 
