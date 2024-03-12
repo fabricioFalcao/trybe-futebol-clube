@@ -1,5 +1,5 @@
 import * as joi from 'joi';
-import { Login } from '../types/Login';
+import { Login } from '../types/EndpointResponse';
 
 const blankField = 'All fields must be filled';
 const invalidField = 'Invalid email or password';

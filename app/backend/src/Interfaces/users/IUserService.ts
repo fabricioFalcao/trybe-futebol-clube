@@ -1,9 +1,8 @@
 import { Token } from '../../types/Token';
 import { ServiceResponse } from '../../types/ServiceResponse';
 
-import { Login } from '../../types/Login';
+import { Login } from '../../types/EndpointResponse';
 
 export default interface IUserService {
   userLogin(login: Login): Promise<ServiceResponse<Token>>,
-  // userRole(id: IUser['id']): Promise<ServiceResponse<Role>>
 }

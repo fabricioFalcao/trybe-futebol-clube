@@ -1,5 +1,5 @@
 import { compareSync } from 'bcryptjs';
-import { Login } from '../../types/Login';
+import { Login } from '../../types/EndpointResponse';
 import { ServiceResponse } from '../../types/ServiceResponse';
 import { Token } from '../../types/Token';
 import IUserService from '../../Interfaces/users/IUserService';

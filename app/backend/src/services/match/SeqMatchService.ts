@@ -20,4 +20,11 @@ export default class SeqMatchService extends MatchService {
     });
     return data.map((match) => match.dataValues);
   }
+
+  protected async finishedMatch(matchId: number): Promise<boolean> {
+    const [updatedMatch] = await this.model
+      .update({ inProgress: false }, { where: { id: matchId } });
+
+    return updatedMatch !== 0;
+  }
 }
