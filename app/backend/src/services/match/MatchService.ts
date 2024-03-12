@@ -1,4 +1,4 @@
-import { MatchNewData } from '../../types/UpdateData';
+import { MatchNewData, NewMatch } from '../../types/InsertData';
 import { Finished, Updated } from '../../types/EndpointResponse';
 import { ServiceResponse } from '../../types/ServiceResponse';
 import IMatch from '../../Interfaces/matches/IMatch';
@@ -13,6 +13,8 @@ export default abstract class MatchService implements IMatchService {
 
   // updatedMatch shall handle both finish and update matches feature
   protected abstract updatedMatch(matchId: number, matchNewData?: MatchNewData): Promise<boolean>;
+
+  protected abstract createdMatch(newMatch: NewMatch): Promise<IMatch>;
 
   public async findAllMatches(inProgress: boolean | undefined): Promise<ServiceResponse<IMatch[]>> {
     const data = await this.matchesList(inProgress);
@@ -34,5 +36,20 @@ export default abstract class MatchService implements IMatchService {
     if (!updatedRows) return { status: 'SERVER_ERROR', data: { message: 'Unable to update it' } };
 
     return { status: 'SUCCESSFUL', data: { message: 'Updated' } };
+  }
+
+  public async createMatch(newMatch: NewMatch): Promise<ServiceResponse<IMatch>> {
+    if (newMatch.homeTeamId === newMatch.awayTeamId) {
+      return {
+        status: 'INVALID_VALUE',
+        data: { message: 'It is not possible to create a match with two equal teams' },
+      };
+    }
+    try {
+      const match = await this.createdMatch(newMatch);
+      return { status: 'CREATED', data: match };
+    } catch (error) {
+      return { status: 'NOT_FOUND', data: { message: 'There is no team with such id!' } };
+    }
   }
 }

@@ -15,7 +15,7 @@ class SeqMatchModel extends Model
   declare homeTeamGoals: number;
   declare awayTeamId: number;
   declare awayTeamGoals: number;
-  declare inProgress: boolean;
+  declare inProgress: CreationOptional<boolean>;
 }
 
 SeqMatchModel.init(
@@ -55,6 +55,7 @@ SeqMatchModel.init(
     inProgress: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: true,
     },
   },
   {

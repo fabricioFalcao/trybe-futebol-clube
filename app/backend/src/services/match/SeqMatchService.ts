@@ -1,4 +1,4 @@
-import { MatchNewData } from '../../types/UpdateData';
+import { MatchNewData, NewMatch } from '../../types/InsertData';
 import IMatch from '../../Interfaces/matches/IMatch';
 import SeqTeamModel from '../../database/models/SeqTeamModel';
 import SeqMatchModel from '../../database/models/SeqMatchModel';
@@ -27,5 +27,9 @@ export default class SeqMatchService extends MatchService {
     const [updatedRows] = await this.model.update(matchNewData, { where: { id: matchId } });
 
     return updatedRows !== 0;
+  }
+
+  protected async createdMatch(newMatch: NewMatch): Promise<IMatch> {
+    return this.model.create(newMatch);
   }
 }

@@ -1,4 +1,5 @@
-type ServiceResponseErrorType = 'UNAUTHORIZED' | 'NOT_FOUND' | 'BAD_REQUEST' | 'SERVER_ERROR';
+type ServiceResponseErrorType =
+  'INVALID_VALUE' | 'UNAUTHORIZED' | 'NOT_FOUND' | 'BAD_REQUEST' | 'SERVER_ERROR';
 
 type ServiceResponseSuccessType = 'SUCCESSFUL' | 'CREATED';
 
