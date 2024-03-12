@@ -66,10 +66,10 @@ SeqMatchModel.init(
   },
 );
 
-SeqMatchModel.belongsTo(SeqTeamModel, { foreignKey: 'homeTeamId' });
-SeqMatchModel.belongsTo(SeqTeamModel, { foreignKey: 'awayTeamId' });
+SeqMatchModel.belongsTo(SeqTeamModel, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+SeqMatchModel.belongsTo(SeqTeamModel, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 
-SeqTeamModel.hasMany(SeqMatchModel, { foreignKey: 'homeTeamId', as: 'homeTeam' });
-SeqTeamModel.hasMany(SeqMatchModel, { foreignKey: 'awayTeamId', as: 'awayTeam' });
+SeqTeamModel.hasMany(SeqMatchModel, { foreignKey: 'homeTeamId' });
+SeqTeamModel.hasMany(SeqMatchModel, { foreignKey: 'awayTeamId' });
 
 export default SeqMatchModel;

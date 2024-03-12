@@ -29,7 +29,7 @@ describe('Login endpoint integration tests', () => {
 
     // Assert
     expect(status).to.equal(200);
-    expect(body.token.split('.')[0]).to.be.equal(token);
+    expect(body.token.split('.')[0]).to.be.equal(token.split('.')[0]);
   })
 
 })
@@ -39,15 +39,15 @@ describe('Role endpoint integration tests', () => {
 
   it('should return status 200 and the correct role when authenticated', async () => {
     // Arrange
-    const mockFindOneReturn = SeqUserModel.build(userFromDB);
-    sinon.stub(SeqUserModel, 'findByPk').resolves(mockFindOneReturn)
+    const authHeader = `Bearer ${token}`;
 
     // Act
-    const { status, body } = await chai.request(app).get('/login/role')
+    const { status, body } = await chai.request(app).get('/login/role').set('Authorization', authHeader);
 
     // Assert
     expect(status).to.equal(200);
     expect(body).to.deep.equal(role);
+
   })
 
 })
