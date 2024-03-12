@@ -5,7 +5,10 @@ type Login = {
 
 type Finished = { message: 'Finished' };
 
+type Updated = { message: 'Updated' };
+
 export {
   Login,
   Finished,
+  Updated,
 };

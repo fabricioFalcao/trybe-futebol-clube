@@ -1,3 +1,4 @@
+import { MatchNewData } from '../../types/UpdateData';
 import IMatch from '../../Interfaces/matches/IMatch';
 import SeqTeamModel from '../../database/models/SeqTeamModel';
 import SeqMatchModel from '../../database/models/SeqMatchModel';
@@ -21,10 +22,10 @@ export default class SeqMatchService extends MatchService {
     return data.map((match) => match.dataValues);
   }
 
-  protected async finishedMatch(matchId: number): Promise<boolean> {
-    const [updatedMatch] = await this.model
-      .update({ inProgress: false }, { where: { id: matchId } });
+  protected async updatedMatch(matchId: number, matchNewData: MatchNewData = { inProgress: false })
+    : Promise<boolean> {
+    const [updatedRows] = await this.model.update(matchNewData, { where: { id: matchId } });
 
-    return updatedMatch !== 0;
+    return updatedRows !== 0;
   }
 }

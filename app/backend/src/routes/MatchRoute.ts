@@ -13,5 +13,10 @@ router.patch(
   userAuthenticator,
   (req: Request, res: Response) => controller.finishMatch(req, res),
 );
+router.patch(
+  '/:id',
+  userAuthenticator,
+  (req: Request, res: Response) => controller.updateMatch(req, res),
+);
 
 export default router;
