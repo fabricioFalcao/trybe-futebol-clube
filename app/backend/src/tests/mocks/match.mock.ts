@@ -79,7 +79,7 @@ const mockedMatch = {
   "id": 1,
   "homeTeamId": 11,
   "homeTeamGoals": 5,
-  "awayTeamId": 2,
+  "awayTeamId": 8,
   "awayTeamGoals": 1,
   "inProgress": false,
 }

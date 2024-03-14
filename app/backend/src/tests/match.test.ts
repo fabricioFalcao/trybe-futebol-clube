@@ -18,7 +18,7 @@ const { expect } = chai;
 
 const { app } = new App()
 
-describe('Teams endpoints integration tests', () => {
+describe('Match endpoints integration tests', () => {
   beforeEach(sinon.restore)
 
   it('should return status 200 and the list of all teams matches for no query', async () => {
