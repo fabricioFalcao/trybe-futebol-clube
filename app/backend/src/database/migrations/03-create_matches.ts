@@ -18,8 +18,7 @@ export default {
           model: 'teams',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onUpdate: 'CASCADE'
       },
       homeTeamGoals: {
         type: DataTypes.INTEGER,
@@ -34,8 +33,7 @@ export default {
           model: 'teams',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onUpdate: 'CASCADE'
       },
       awayTeamGoals: {
         type: DataTypes.INTEGER,
@@ -46,6 +44,7 @@ export default {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         field: 'in_progress',
+        defaultValue: true
       }
     });
   },
