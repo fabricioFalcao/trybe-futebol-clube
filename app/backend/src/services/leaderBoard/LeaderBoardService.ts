@@ -9,12 +9,14 @@ export default abstract class LeaderBoardService {
   private _homeLeaderBoard: TeamResult[] = [];
   private _awayLeaderBoard: TeamResult[] = [];
   private _matchesList!: IMatch[];
+  private _teamsList!: ITeam[];
 
   constructor(protected teamModel = SeqTeamModel, protected matchModel = SeqMatchModel) {
     this.initialize();
   }
 
   protected async initialize() {
+    this._teamsList = await this.teamsList();
     this._matchesList = await this.matchesList();
   }
 
@@ -28,9 +30,8 @@ export default abstract class LeaderBoardService {
     return this._matchesList.filter((match) => match[homeOrAwayId] === teamId);
   }
 
-  private async setLeaderBoard(homeOrAway: HomeOrAway) {
-    const teamsList = await this.teamsList();
-    return teamsList
+  private setLeaderBoard(homeOrAway: HomeOrAway) {
+    return this._teamsList
       .map((team) => new TeamResult(
         homeOrAway,
         this.filterMatchesList(team.id, homeOrAway),
@@ -44,7 +45,8 @@ export default abstract class LeaderBoardService {
   }
 
   public async partialLeaderBoard(homeOrAway: HomeOrAway) {
-    const data = await this.setLeaderBoard(homeOrAway);
+    await this.initialize();
+    const data = this.setLeaderBoard(homeOrAway);
 
     if (!data) return { status: 'SERVER_ERROR', data: { message: 'Unable to retrieve data' } };
 
