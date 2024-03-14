@@ -14,4 +14,9 @@ export default class LeaderBoardController {
     const { status, data } = await this.service.partialLeaderBoard('away');
     return res.status(mapStatusHTTP(status)).json(data);
   }
+
+  public async leaderBoard(_req: Request, res: Response) {
+    const { status, data } = await this.service.leaderBoard();
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
 }
