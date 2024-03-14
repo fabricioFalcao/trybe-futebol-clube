@@ -68,7 +68,25 @@ const mockedReturnList = [
   }
 ]
 
+const mockedInputMatch = {
+  "homeTeamId": 1,
+  "homeTeamGoals": 5,
+  "awayTeamId": 2,
+  "awayTeamGoals": 1,
+}
+
+const mockedMatch = {
+  "id": 1,
+  "homeTeamId": 11,
+  "homeTeamGoals": 5,
+  "awayTeamId": 2,
+  "awayTeamGoals": 1,
+  "inProgress": false,
+}
+
 export {
   mockedMatchList,
-  mockedReturnList
+  mockedReturnList,
+  mockedMatch,
+  mockedInputMatch
 }
