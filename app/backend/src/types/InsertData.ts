@@ -9,7 +9,8 @@ type NewMatch = {
   homeTeamId: number,
   awayTeamId: number,
   homeTeamGoals: number,
-  awayTeamGoals: number
+  awayTeamGoals: number,
+  inProgress: boolean
 };
 
 export {

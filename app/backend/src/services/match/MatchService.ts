@@ -38,7 +38,8 @@ export default abstract class MatchService implements IMatchService {
     return { status: 'SUCCESSFUL', data: { message: 'Updated' } };
   }
 
-  public async createMatch(newMatch: NewMatch): Promise<ServiceResponse<IMatch>> {
+  public async createMatch(newMatch: Omit<NewMatch, 'inProgress'>)
+    : Promise<ServiceResponse<IMatch>> {
     if (newMatch.homeTeamId === newMatch.awayTeamId) {
       return {
         status: 'INVALID_VALUE',
@@ -46,7 +47,8 @@ export default abstract class MatchService implements IMatchService {
       };
     }
     try {
-      const match = await this.createdMatch(newMatch);
+      const inputData = { ...newMatch, inProgress: true };
+      const match = await this.createdMatch(inputData);
       return { status: 'CREATED', data: match };
     } catch (error) {
       return { status: 'NOT_FOUND', data: { message: 'There is no team with such id!' } };
