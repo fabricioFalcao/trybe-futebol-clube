@@ -6,7 +6,6 @@ import { SeqTeamDao } from '../daoModels';
 export default class TeamService {
   constructor(private model: ITeamModel = new SeqTeamDao()) { }
 
-
   public async findAllTeams(): Promise<ServiceResponse<ITeam[]>> {
     const data = await this.model.findAllTeams();
     return { status: 'SUCCESSFUL', data };

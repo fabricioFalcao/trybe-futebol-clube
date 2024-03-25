@@ -1,11 +1,11 @@
-import SeqMatchService from './match/SeqMatchService';
 import SeqLeaderBoardService from './leaderBoard/SeqLeaderBoardService';
 import UserService from './UserService';
 import TeamService from './TeamService';
+import MatchService from './MatchService';
 
 export {
-  SeqMatchService,
   SeqLeaderBoardService,
   UserService,
   TeamService,
+  MatchService
 };

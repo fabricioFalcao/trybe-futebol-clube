@@ -1,9 +1,9 @@
-import ITeam from "../Interfaces/teams/ITeam";
-import SeqTeamModel from "../database/models/SeqTeamModel";
-import ITeamModel from "../Interfaces/teams/ITeamModel";
+import ITeam from '../Interfaces/teams/ITeam';
+import SeqTeamModel from '../database/models/SeqTeamModel';
+import ITeamModel from '../Interfaces/teams/ITeamModel';
 
 export default class SeqTeamDao implements ITeamModel {
-  private model = SeqTeamModel
+  private model = SeqTeamModel;
 
   async findTeamById(id: number): Promise<ITeam | null> {
     return this.model.findByPk(id);
@@ -13,5 +13,4 @@ export default class SeqTeamDao implements ITeamModel {
     const data = await this.model.findAll();
     return data.map((team) => team.dataValues);
   }
-
 }

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { SeqMatchService } from '../services';
 import mapStatusHTTP from '../utils/mapStatusHTTP';
+import { MatchService } from '../services';
 
 export default class MatchController {
-  constructor(private service = new SeqMatchService()) { }
+  constructor(private service = new MatchService()) { }
 
   public async findAllMatches(req: Request, res: Response) {
     const { inProgress } = req.query;

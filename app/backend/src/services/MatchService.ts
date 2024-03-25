@@ -1,28 +1,20 @@
-import { MatchNewData, NewMatch } from '../../types/InsertData';
-import { Finished, Updated } from '../../types/EndpointResponse';
-import { ServiceResponse } from '../../types/ServiceResponse';
-import IMatch from '../../Interfaces/matches/IMatch';
-import IMatchService from '../../Interfaces/matches/IMatchService';
-import SeqMatchModel from '../../database/models/SeqMatchModel';
+import { MatchNewData, NewMatch } from '../types/InsertData';
+import { Finished, Updated } from '../types/EndpointResponse';
+import { ServiceResponse } from '../types/ServiceResponse';
+import IMatch from '../Interfaces/matches/IMatch';
+import IMatchModel from '../Interfaces/matches/IMatchModel';
+import { SeqMatchDao } from '../daoModels';
 
-export default abstract class MatchService implements IMatchService {
-  constructor(protected model = SeqMatchModel) { }
-
-  // matchesList shall handle both cases when matches are filtered according to inProgress status or not filtered at all
-  protected abstract matchesList(inProgress: boolean | undefined): Promise<IMatch[]>;
-
-  // updatedMatch shall handle both finish and update matches feature
-  protected abstract updatedMatch(matchId: number, matchNewData?: MatchNewData): Promise<boolean>;
-
-  protected abstract createdMatch(newMatch: NewMatch): Promise<IMatch>;
+export default class MatchService {
+  constructor(private model: IMatchModel = new SeqMatchDao()) { }
 
   public async findAllMatches(inProgress: boolean | undefined): Promise<ServiceResponse<IMatch[]>> {
-    const data = await this.matchesList(inProgress);
+    const data = await this.model.findAllMatches(inProgress);
     return { status: 'SUCCESSFUL', data };
   }
 
   public async finishMatch(matchId: number): Promise<ServiceResponse<Finished>> {
-    const updatedRows = await this.updatedMatch(matchId);
+    const updatedRows = await this.model.updateMatch(matchId);
 
     if (!updatedRows) return { status: 'SERVER_ERROR', data: { message: 'Unable to finish it' } };
 
@@ -31,7 +23,7 @@ export default abstract class MatchService implements IMatchService {
 
   public async updateMatch(matchId: number, matchNewData: MatchNewData)
     : Promise<ServiceResponse<Updated>> {
-    const updatedRows = await this.updatedMatch(matchId, matchNewData);
+    const updatedRows = await this.model.updateMatch(matchId, matchNewData);
 
     if (!updatedRows) return { status: 'SERVER_ERROR', data: { message: 'Unable to update it' } };
 
@@ -48,7 +40,7 @@ export default abstract class MatchService implements IMatchService {
     }
     try {
       const inputData = { ...newMatch, inProgress: true };
-      const match = await this.createdMatch(inputData);
+      const match = await this.model.createMatch(inputData);
       return { status: 'CREATED', data: match };
     } catch (error) {
       return { status: 'NOT_FOUND', data: { message: 'There is no team with such id!' } };
