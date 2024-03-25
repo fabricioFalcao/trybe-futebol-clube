@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
+import { UserService } from '../services';
 import mapStatusHTTP from '../utils/mapStatusHTTP';
-import { SeqUserService } from '../services';
 
 export default class UserController {
-  constructor(private service = new SeqUserService(), private role = '') { }
+  constructor(private service = new UserService(), private role = '') { }
 
   public async userLogin(req: Request, res: Response) {
     const login = req.body;

@@ -1,19 +1,16 @@
 import { compareSync } from 'bcryptjs';
+import SeqUserModelDAO from '../../models DAO/SeqUserModel';
 import { Login } from '../../types/EndpointResponse';
 import { ServiceResponse } from '../../types/ServiceResponse';
 import { Token } from '../../types/Token';
-import IUserService from '../../Interfaces/users/IUserService';
-import SeqUserModel from '../../database/models/SeqUserModel';
-import IUser from '../../Interfaces/users/IUser';
 import jwtTokenUtility from '../../utils/jwtTokenUtility';
+import IUserModel from '../../Interfaces/users/IUserModel';
 
-export default abstract class UserService implements IUserService {
-  constructor(protected model = SeqUserModel) { }
-
-  protected abstract userByEmail(email: IUser['email']): Promise<IUser | null>;
+export default class UserService {
+  constructor(private model: IUserModel = new SeqUserModelDAO()) { }
 
   public async userLogin(login: Login): Promise<ServiceResponse<Token>> {
-    const registeredUser = await this.userByEmail(login.email);
+    const registeredUser = await this.model.findUserByEmail(login.email);
 
     if (!registeredUser || !compareSync(login.password, registeredUser.password)) {
       return { status: 'UNAUTHORIZED', data: { message: 'Invalid email or password' } };
