@@ -2,11 +2,10 @@ import IMatch from '../Interfaces/matches/IMatch';
 import IMatchModel from '../Interfaces/matches/IMatchModel';
 import SeqMatchModel from '../database/models/SeqMatchModel';
 import SeqTeamModel from '../database/models/SeqTeamModel';
-import { MatchNewData } from '../types/InsertData';
-import { NewMatch } from '../types/InsertData';
+import { MatchNewData, NewMatch } from '../types/InsertData';
 
 export default class SeqMatchDao implements IMatchModel {
-  private model = SeqMatchModel
+  private model = SeqMatchModel;
 
   async findAllMatches(inProgress: boolean | undefined): Promise<IMatch[]> {
     const whereCondition = inProgress !== undefined ? { inProgress } : undefined;

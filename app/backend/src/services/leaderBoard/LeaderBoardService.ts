@@ -1,30 +1,30 @@
 import { ServiceResponse } from '../../types/ServiceResponse';
 import IResult from '../../Interfaces/leaderBoard/IResult';
-import SeqTeamModel from '../../database/models/SeqTeamModel';
-import SeqMatchModel from '../../database/models/SeqMatchModel';
 import IMatch from '../../Interfaces/matches/IMatch';
 import { HomeOrAway } from '../../types/HomeOrAway';
 import ITeam from '../../Interfaces/teams/ITeam';
-import TeamResult from './teamClass/TeamResult';
+import TeamResult from './TeamResult';
+import { SeqTeamDao, SeqMatchDao } from '../../daoModels';
+import ITeamModel from '../../Interfaces/teams/ITeamModel';
+import IMatchModel from '../../Interfaces/matches/IMatchModel';
 
-export default abstract class LeaderBoardService {
+export default class LeaderBoardService {
   private _homeLeaderBoard: IResult[] = [];
   private _awayLeaderBoard: IResult[] = [];
   private _matchesList!: IMatch[];
   private _teamsList!: ITeam[];
 
-  constructor(protected teamModel = SeqTeamModel, protected matchModel = SeqMatchModel) {
+  constructor(
+    protected teamModel: ITeamModel = new SeqTeamDao(),
+    protected matchModel: IMatchModel = new SeqMatchDao(),
+  ) {
     this.initialize();
   }
 
   protected async initialize() {
-    this._teamsList = await this.teamsList();
-    this._matchesList = await this.matchesList();
+    this._teamsList = await this.teamModel.findAllTeams();
+    this._matchesList = await this.matchModel.findAllMatches(false);
   }
-
-  protected abstract teamsList(): Promise<ITeam[]>;
-
-  protected abstract matchesList(): Promise<IMatch[]>;
 
   private filterMatchesList(teamId: number, homeOrAway: HomeOrAway) {
     const homeOrAwayId = homeOrAway === 'home' ? 'homeTeamId' : 'awayTeamId';

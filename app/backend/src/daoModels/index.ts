@@ -5,5 +5,5 @@ import SeqMatchDao from './SeqMatchDao';
 export {
   SeqUserDao,
   SeqTeamDao,
-  SeqMatchDao
+  SeqMatchDao,
 };
