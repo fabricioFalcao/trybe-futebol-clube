@@ -1,5 +1,5 @@
-import { HomeOrAway, HomeOrAwayGoals } from '../../../types/HomeOrAway';
-import IMatch from '../../../Interfaces/matches/IMatch';
+import { HomeOrAway, HomeOrAwayGoals } from '../../types/HomeOrAway';
+import IMatch from '../../Interfaces/matches/IMatch';
 
 export default class TeamResult {
   private teamGoals!: HomeOrAwayGoals;

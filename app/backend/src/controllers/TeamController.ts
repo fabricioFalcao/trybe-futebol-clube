@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import mapStatusHTTP from '../utils/mapStatusHTTP';
-import { SeqTeamService } from '../services';
+import { TeamService } from '../services';
 
 export default class TeamController {
-  constructor(private service = new SeqTeamService()) { }
+  constructor(private service = new TeamService()) { }
 
   public async findAllTeams(_req: Request, res: Response) {
     const { status, data } = await this.service.findAllTeams();

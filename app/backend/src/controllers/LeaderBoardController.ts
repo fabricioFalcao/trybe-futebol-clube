@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { SeqLeaderBoardService } from '../services';
+import { LeaderBoardService } from '../services';
 import mapStatusHTTP from '../utils/mapStatusHTTP';
 
 export default class LeaderBoardController {
-  constructor(private service = new SeqLeaderBoardService()) { }
+  constructor(private service = new LeaderBoardService()) { }
 
   public async homeLeaderBoard(_req: Request, res: Response) {
     const { status, data } = await this.service.partialLeaderBoard('home');
